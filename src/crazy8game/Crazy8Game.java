@@ -231,8 +231,67 @@ public class Crazy8Game {
                     stringPlayerHand.remove(userInput);
                     playerHandSize--;
                 }
-                
+                else if (playerHand[userInput] < 13 && topCard < 13) {
+                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
+                        System.out.println("Oppenent misses a turn");
+                    }
+                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
+                        System.out.println("Oppenent picks up 2");
+                    }
+                    else {
+                    System.out.println("Invalid play");
+                    }
+                }
+                else if (playerHand[userInput] < 26 && playerHand [userInput] > 12 && topCard < 26 && topCard > 12) {
+                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
+                        System.out.println("Oppenent misses a turn");
+                    }
+                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
+                        System.out.println("Oppenent picks up 2");
+                    }
+                    else {
+                    System.out.println("Invalid play");
+                    }
+                }
+                else if (playerHand[userInput] < 39 && playerHand [userInput] > 25 && topCard < 39 && topCard > 25) {
+                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
+                        System.out.println("Oppenent misses a turn");
+                    }
+                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
+                        System.out.println("Oppenent picks up 2");
+                    }
+                    else {
+                    System.out.println("Invalid play");
+                    }
+                }
+                else if (playerHand[userInput] <= 51 && playerHand [userInput] > 38 && topCard <= 51 && topCard > 38) {
+                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
+                        System.out.println("Oppenent misses a turn");
+                    }
+                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
+                        System.out.println("Oppenent picks up 2");
+                    }
+                    else {
+                    System.out.println("Invalid play");
+                    }
+                }
+                else if (playerHand[userInput] == topCard + 13 || playerHand[userInput] == topCard - 13) {
+                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
+                        System.out.println("Oppenent misses a turn");
+                    }
+                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
+                        System.out.println("Oppenent picks up 2");
+                    }
+                    else {
+                    System.out.println("Invalid play");
+                }
+                    
+                }
+                else {
+                    System.out.println("Invalid play");
+                }
             }
+                
             else if(userInput == -1) {
                 topCard = randomSuit()*randomCard();
                 firstCard = cardDeck[topCard];
