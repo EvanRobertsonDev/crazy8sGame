@@ -7,6 +7,7 @@
 package crazy8game;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  *
@@ -67,8 +68,12 @@ public class Crazy8Game {
      * it all back to this method.
      */
     public static void game() {
+       Scanner input = new Scanner(System.in);
        int topCard;
-       
+       int userInput;
+       int playerHandSize = 0;
+       int computerHandSize = 0;
+       int loop8s = 0;
        
        //New array with every card in a playing cards deck
        String [ ] cardDeck = new String [52];
@@ -123,7 +128,8 @@ public class Crazy8Game {
        cardDeck[48] = "◆ 10 of diamonds ◆";
        cardDeck[49] = "◆ Jack of diamonds ◆";
        cardDeck[50] = "◆ Queen of diamonds ◆";
-       cardDeck[51] = "◆ King of diamonds ◆"; 
+       cardDeck[51] = "◆ King of diamonds ◆";
+       
        
        //Call cardMethod for 16 index array of all cards
        int [ ] cards = cardMethod();
@@ -139,36 +145,114 @@ public class Crazy8Game {
            computerHand[i] = cards[i+8];
        }
        
-       //Convert intro string arrays
-       String [ ] stringPlayerHand = new String[8];
-       String [ ] stringComputerHand = new String[8];
+       //Convert into string arrays
+       ArrayList stringPlayerHand = new ArrayList();
+       ArrayList stringComputerHand = new ArrayList();
        //Match everything to cardDeck array
        for (int i = 0; i < 8; i++) {
-           stringPlayerHand[i] = cardDeck[playerHand[i]];
+           stringPlayerHand.add(i);
+           playerHandSize++;
+           stringPlayerHand.set(i, cardDeck[playerHand[i]]);
        }
 
        for (int i = 0; i < 8; i++) {
-           stringComputerHand[i] = cardDeck[computerHand[i]];
+           stringComputerHand.add(i);
+           computerHandSize++;
+           stringComputerHand.set(i, cardDeck[computerHand[i]]);
        }
        
-       //Print out cards
-       for (int i = 0; i < 8; i++) {
-            System.out.println(i + "..." + stringPlayerHand[i]);
-       }
-       
-       for (int i = 0; i < 8; i++) {
-            System.out.println(i + "..." + stringComputerHand[i]);
-       }
-       topCard = randomSuit()*randomCard();
-       String firstCard = cardDeck[topCard];
-
-           while (Arrays.stream(stringPlayerHand).anyMatch(firstCard::equals) || Arrays.stream(stringComputerHand).anyMatch(firstCard::equals)) {
-               topCard = randomSuit()*randomCard();
-               firstCard = cardDeck[topCard];
-           }
-        System.out.println("The top card is: " + firstCard);
-        System.out.println("Type in card you want to play");
-        System.out.println("Type pickup to pickup a card");
+        //Randomize First Card
+        topCard = randomSuit()*randomCard();
+        String firstCard = cardDeck[topCard];
+        
+        while (stringPlayerHand.contains(firstCard) || stringComputerHand.contains(firstCard)) {
+            topCard = randomSuit()*randomCard();
+            firstCard = cardDeck[topCard];
+        }
+        
+        //Loop the game
+        while(stringPlayerHand.size() > 0 || stringComputerHand.size() > 0) {
+            
+            //Print your hand
+            for (int i = 0; i < playerHandSize; i++) {
+                System.out.println(i + "..." + stringPlayerHand.get(i));
+            }
+            //Give the top card
+            System.out.println("The top card is: " + firstCard);
+            System.out.println("Type in a number for the card you want to play");
+            System.out.println("Type -1 to pickup a card");
+        
+            userInput = input.nextInt();
+        
+            if (userInput < playerHandSize -1 && userInput > 0) {
+                if (stringPlayerHand.get(userInput) == cardDeck[46] || stringPlayerHand.get(userInput) == cardDeck[33] || stringPlayerHand.get(userInput) == cardDeck[20] || stringPlayerHand.get(userInput) == cardDeck[7]) {
+                    loop8s = 1;
+                    while (loop8s == 1) {
+                        //An 8 was played choos a new suit
+                        System.out.println("What suit do you want to change to");
+                        System.out.println("1. Spades");
+                        System.out.println("2. Clubs");
+                        System.out.println("3. Hearts");
+                        System.out.println("4. Diamonds");
+                    
+                        //Input
+                        userInput = input.nextInt();
+                    
+                        switch (userInput) {
+                            case 1:
+                                System.out.println("Suit has been changed to spades");
+                                System.out.println("The top card is now 8 of spades");
+                                firstCard = cardDeck[7];
+                                loop8s = 0;
+                                break;
+                           case 2:
+                                System.out.println("Suit has been changed to clubs");
+                                System.out.println("The top card is now 8 of clubs");
+                                firstCard = cardDeck[20];
+                                loop8s = 0;
+                                break;
+                            case 3:
+                                System.out.println("Suit has been changed to hearts");
+                                System.out.println("The top card is now 8 of hearts");
+                                firstCard = cardDeck[33];
+                                loop8s = 0;
+                                break;
+                            case 4:
+                                System.out.println("Suit has been changed to diamonds");
+                                System.out.println("The top card is now 8 of diamonds");
+                                firstCard= cardDeck[46];
+                                loop8s = 0;
+                                break;
+                            default:
+                                System.out.println("Invalid answer");
+                                loop8s = 1;
+                        }
+                    }
+                    stringPlayerHand.remove(userInput);
+                    playerHandSize--;
+                }
+                
+            }
+            else if(userInput == -1) {
+                topCard = randomSuit()*randomCard();
+                firstCard = cardDeck[topCard];
+                while (stringPlayerHand.contains(firstCard) || stringComputerHand.contains(firstCard)) {
+                topCard = randomSuit()*randomCard();
+                firstCard = cardDeck[topCard];
+                }
+                stringPlayerHand.add(firstCard);
+                playerHandSize++;
+                System.out.println("You picked up a(n)" + stringPlayerHand.get(playerHandSize));
+            }
+            else if (userInput > playerHandSize-1) {
+                System.out.println("Invalid play");
+            }
+            
+            
+            
+            
+        }
+        
     }
     
     /**
