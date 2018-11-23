@@ -6,6 +6,7 @@
 
 package crazy8game;
 import java.util.Scanner;
+import java.util.Arrays;
 
 /**
  *
@@ -71,59 +72,58 @@ public class Crazy8Game {
        
        //New array with every card in a playing cards deck
        String [ ] cardDeck = new String [52];
-       cardDeck[0] = "Ace of spades";
-       cardDeck[1] = "2 of spades";
-       cardDeck[2] = "3 of spades";
-       cardDeck[3] = "4 of spades";
-       cardDeck[4] = "5 of spades";
-       cardDeck[5] = "6 of spades";
-       cardDeck[6] = "7 of spades";
-       cardDeck[7] = "8 of spades";
-       cardDeck[8] = "9 of spades";
-       cardDeck[9] = "10 of spades";
-       cardDeck[10] = "Jack of spades";
-       cardDeck[11] = "Queen of spades";
-       cardDeck[12] = "King of spades";
-       cardDeck[13] = "Ace of Clubs";
-       cardDeck[14] = "2 of Clubs";
-       cardDeck[15] = "3 of Clubs";
-       cardDeck[16] = "4 of Clubs";
-       cardDeck[17] = "5 of Clubs";
-       cardDeck[18] = "6 of Clubs";
-       cardDeck[19] = "7 of Clubs";
-       cardDeck[20] = "8 of Clubs";
-       cardDeck[21] = "9 of Clubs";
-       cardDeck[22] = "10 of Clubs";
-       cardDeck[23] = "Jack of Clubs";
-       cardDeck[24] = "Queen of Clubs";
-       cardDeck[25] = "King of Clubs";
-       cardDeck[26] = "Ace of hearts";
-       cardDeck[27] = "2 of hearts";
-       cardDeck[28] = "3 of hearts";
-       cardDeck[29] = "4 of hearts";
-       cardDeck[30] = "5 of hearts";
-       cardDeck[31] = "6 of hearts";
-       cardDeck[32] = "7 of hearts";
-       cardDeck[33] = "8 of hearts";
-       cardDeck[34] = "9 of hearts";
-       cardDeck[35] = "10 of hearts";
-       cardDeck[36] = "Jack of hearts";
-       cardDeck[37] = "Queen of hearts";
-       cardDeck[38] = "King of hearts";
-       cardDeck[39] = "Ace of diamonds";
-       cardDeck[40] = "2 of diamonds";
-       cardDeck[41] = "3 of diamonds";
-       cardDeck[42] = "4 of diamonds";
-       cardDeck[43] = "5 of diamonds";
-       cardDeck[44] = "6 of diamonds";
-       cardDeck[45] = "7 of diamonds";
-       cardDeck[46] = "8 of diamonds";
-       cardDeck[47] = "9 of diamonds";
-       cardDeck[48] = "10 of diamonds";
-       cardDeck[49] = "Jack of diamonds";
-       cardDeck[50] = "Queen of diamonds";
-       cardDeck[51] = "King of diamonds";
-       
+       cardDeck[0] = "♠ Ace of spades ♠";
+       cardDeck[1] = "♠ 2 of spades ♠";
+       cardDeck[2] = "♠ 3 of spades ♠";
+       cardDeck[3] = "♠ 4 of spades ♠";
+       cardDeck[4] = "♠ 5 of spades ♠";
+       cardDeck[5] = "♠ 6 of spades ♠";
+       cardDeck[6] = "♠ 7 of spades ♠";
+       cardDeck[7] = "♠ 8 of spades ♠";
+       cardDeck[8] = "♠ 9 of spades ♠";
+       cardDeck[9] = "♠ 10 of spades ♠";
+       cardDeck[10] = "♠ Jack of spades ♠";
+       cardDeck[11] = "♠ Queen of spades ♠";
+       cardDeck[12] = "♠ King of spades ♠";
+       cardDeck[13] = "♣ Ace of Clubs ♣";
+       cardDeck[14] = "♣ 2 of Clubs ♣";
+       cardDeck[15] = "♣ 3 of Clubs ♣";
+       cardDeck[16] = "♣ 4 of Clubs ♣";
+       cardDeck[17] = "♣ 5 of Clubs ♣";
+       cardDeck[18] = "♣ 6 of Clubs ♣";
+       cardDeck[19] = "♣ 7 of Clubs ♣";
+       cardDeck[20] = "♣ 8 of Clubs ♣";
+       cardDeck[21] = "♣ 9 of Clubs ♣";
+       cardDeck[22] = "♣ 10 of Clubs ♣";
+       cardDeck[23] = "♣ Jack of Clubs ♣";
+       cardDeck[24] = "♣ Queen of Clubs ♣";
+       cardDeck[25] = "♣ King of Clubs ♣";
+       cardDeck[26] = "♥ Ace of hearts ♥";
+       cardDeck[27] = "♥ 2 of hearts ♥";
+       cardDeck[28] = "♥ 3 of hearts ♥";
+       cardDeck[29] = "♥ 4 of hearts ♥";
+       cardDeck[30] = "♥ 5 of hearts ♥";
+       cardDeck[31] = "♥ 6 of hearts ♥";
+       cardDeck[32] = "♥ 7 of hearts ♥";
+       cardDeck[33] = "♥ 8 of hearts ♥";
+       cardDeck[34] = "♥ 9 of hearts ♥";
+       cardDeck[35] = "♥ 10 of hearts ♥";
+       cardDeck[36] = "♥ Jack of hearts ♥";
+       cardDeck[37] = "♥ Queen of hearts ♥";
+       cardDeck[38] = "♥ King of hearts ♥";
+       cardDeck[39] = "◆ Ace of diamonds ◆";
+       cardDeck[40] = "◆ 2 of diamonds ◆";
+       cardDeck[41] = "◆ 3 of diamonds ◆";
+       cardDeck[42] = "◆ 4 of diamonds ◆";
+       cardDeck[43] = "◆ 5 of diamonds ◆";
+       cardDeck[44] = "◆ 6 of diamonds ◆";
+       cardDeck[45] = "◆ 7 of diamonds ◆";
+       cardDeck[46] = "◆ 8 of diamonds ◆";
+       cardDeck[47] = "◆ 9 of diamonds ◆";
+       cardDeck[48] = "◆ 10 of diamonds ◆";
+       cardDeck[49] = "◆ Jack of diamonds ◆";
+       cardDeck[50] = "◆ Queen of diamonds ◆";
+       cardDeck[51] = "◆ King of diamonds ◆"; 
        
        //Call cardMethod for 16 index array of all cards
        int [ ] cards = cardMethod();
@@ -161,13 +161,14 @@ public class Crazy8Game {
        }
        topCard = randomSuit()*randomCard();
        String firstCard = cardDeck[topCard];
-       for (int i = 0; i < 8; i++) {
-           if (stringPlayerHand.contains(firstCard)) {
-               
+
+           while (Arrays.stream(stringPlayerHand).anyMatch(firstCard::equals) || Arrays.stream(stringComputerHand).anyMatch(firstCard::equals)) {
+               topCard = randomSuit()*randomCard();
+               firstCard = cardDeck[topCard];
            }
-       }
-       
-        System.out.println("The top card is: " );
+        System.out.println("The top card is: " + firstCard);
+        System.out.println("Type in card you want to play");
+        System.out.println("Type pickup to pickup a card");
     }
     
     /**
