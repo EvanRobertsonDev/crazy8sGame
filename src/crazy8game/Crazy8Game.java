@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Evan Robertson
+ * November 25th 2018
+ * This is a small demo for a game of crazy 8s. There is also some code for unused 
+ * stuff left in incase I plan to expand and finish.
+ * Known bugs: Choosing some cards may cause index to go out of bounds
  */
 
 package crazy8game;
@@ -19,10 +21,13 @@ public class Crazy8Game {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //Variables
         int menu = 0;
         int input;
-        
+        //Scanner
         Scanner userInput = new Scanner(System.in);
+        
+        //Menu loop
         do {
             System.out.println("Enter a number to continue");
             System.out.println("1. Rules");
@@ -50,16 +55,15 @@ public class Crazy8Game {
      * @return a value of 1 to return to the menu
      */
     public static int rules() {
-        System.out.println("After hitting play, text will pop up telling you what"
+        System.out.println("The is a demo. Ya a demo for carzy 8s. You are limited to only "
+                + " \n playings 8s and picking up cards. There is no computer to play against"
+                + " \n Go play witha real deck. After hitting play, text will pop up telling you what"
                 + " \n cards you have, each with their own corresponding number, you "
                 + " \n will also be told what the top card is. You start the game by "
                 + " \n typing in the corresponding number of the card you want to play. "
-                + " \n If you can't make a move you will automatically be told so "
-                + " \n and a card will be picked up. Next the computer will makes its"
-                + " \n turn and will tell you what card is placed. Any 8's played will "
-                + " \n prompt you to choose suite. Any 2's played will force you to pick up "
-                + " \n 2 cards. 4's skip the oppenents turn. The winner is announced to whoever "
-                + " \n runs out of cards first");
+                + " \n If you can't make a move you must pick up a card."
+                + " \n Next the computer will makes its turn and will tell you what card is placed. "
+                + " \n Any 8's played will prompt you to choose suite.");
         return(1);
     }
     
@@ -68,11 +72,13 @@ public class Crazy8Game {
      * it all back to this method.
      */
     public static void game() {
+        //Scanner
        Scanner input = new Scanner(System.in);
+       //Variables
        int topCard;
        int userInput;
        int playerHandSize = 0;
-       int computerHandSize = 0;
+       //int computerHandSize = 0;
        int loop8s = 0;
        
        //New array with every card in a playing cards deck
@@ -154,16 +160,17 @@ public class Crazy8Game {
            playerHandSize++;
            stringPlayerHand.set(i, cardDeck[playerHand[i]]);
        }
-
-       for (int i = 0; i < 8; i++) {
-           stringComputerHand.add(i);
-           computerHandSize++;
-           stringComputerHand.set(i, cardDeck[computerHand[i]]);
-       }
+       
+       
+       //for (int i = 0; i < 8; i++) {
+          // stringComputerHand.add(i);
+          // computerHandSize++;
+           //stringComputerHand.set(i, cardDeck[computerHand[i]]);
+       //}
        
         //Randomize First Card
         topCard = randomSuit()*randomCard();
-        String firstCard = cardDeck[topCard];
+        String firstCard = cardDeck[topCard-1];
         
         while (stringPlayerHand.contains(firstCard) || stringComputerHand.contains(firstCard)) {
             topCard = randomSuit()*randomCard();
@@ -181,14 +188,18 @@ public class Crazy8Game {
             System.out.println("The top card is: " + firstCard);
             System.out.println("Type in a number for the card you want to play");
             System.out.println("Type -1 to pickup a card");
-        
+            
+            //Get user input for played card
             userInput = input.nextInt();
-        
+            
+            
+            //Decide what to do with chosen card
             if (userInput < playerHandSize -1 && userInput > 0) {
                 if (stringPlayerHand.get(userInput) == cardDeck[46] || stringPlayerHand.get(userInput) == cardDeck[33] || stringPlayerHand.get(userInput) == cardDeck[20] || stringPlayerHand.get(userInput) == cardDeck[7]) {
+                    //Loop choosing a suit until one is chosen
                     loop8s = 1;
                     while (loop8s == 1) {
-                        //An 8 was played choos a new suit
+                        //An 8 was played choose a new suit
                         System.out.println("What suit do you want to change to");
                         System.out.println("1. Spades");
                         System.out.println("2. Clubs");
@@ -226,85 +237,39 @@ public class Crazy8Game {
                             default:
                                 System.out.println("Invalid answer");
                                 loop8s = 1;
+                                break;
                         }
                     }
                     stringPlayerHand.remove(userInput);
                     playerHandSize--;
                 }
-                else if (playerHand[userInput] < 13 && topCard < 13) {
-                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
-                        System.out.println("Oppenent misses a turn");
-                    }
-                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
-                        System.out.println("Oppenent picks up 2");
-                    }
-                    else {
-                    System.out.println("Invalid play");
-                    }
-                }
-                else if (playerHand[userInput] < 26 && playerHand [userInput] > 12 && topCard < 26 && topCard > 12) {
-                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
-                        System.out.println("Oppenent misses a turn");
-                    }
-                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
-                        System.out.println("Oppenent picks up 2");
-                    }
-                    else {
-                    System.out.println("Invalid play");
-                    }
-                }
-                else if (playerHand[userInput] < 39 && playerHand [userInput] > 25 && topCard < 39 && topCard > 25) {
-                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
-                        System.out.println("Oppenent misses a turn");
-                    }
-                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
-                        System.out.println("Oppenent picks up 2");
-                    }
-                    else {
-                    System.out.println("Invalid play");
-                    }
-                }
-                else if (playerHand[userInput] <= 51 && playerHand [userInput] > 38 && topCard <= 51 && topCard > 38) {
-                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
-                        System.out.println("Oppenent misses a turn");
-                    }
-                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
-                        System.out.println("Oppenent picks up 2");
-                    }
-                    else {
-                    System.out.println("Invalid play");
-                    }
-                }
-                else if (playerHand[userInput] == topCard + 13 || playerHand[userInput] == topCard - 13) {
-                    if (stringPlayerHand.get(userInput) == cardDeck[3] || stringPlayerHand.get(userInput) == cardDeck[16] || stringPlayerHand.get(userInput) == cardDeck[29] || stringPlayerHand.get(userInput) == cardDeck[42]) {
-                        System.out.println("Oppenent misses a turn");
-                    }
-                    else if (stringPlayerHand.get(userInput) == cardDeck[1] || stringPlayerHand.get(userInput) == cardDeck[14] || stringPlayerHand.get(userInput) == cardDeck[27] || stringPlayerHand.get(userInput) == cardDeck[40]) {
-                        System.out.println("Oppenent picks up 2");
-                    }
-                    else {
-                    System.out.println("Invalid play");
-                }
-                    
-                }
                 else {
-                    System.out.println("Invalid play");
+                    System.out.println("End of Demo");
                 }
-            }
                 
-            else if(userInput == -1) {
-                topCard = randomSuit()*randomCard();
-                firstCard = cardDeck[topCard];
-                while (stringPlayerHand.contains(firstCard) || stringComputerHand.contains(firstCard)) {
-                topCard = randomSuit()*randomCard();
-                firstCard = cardDeck[topCard];
-                }
-                stringPlayerHand.add(firstCard);
-                playerHandSize++;
-                System.out.println("You picked up a(n)" + stringPlayerHand.get(playerHandSize));
             }
+            //User chooses to pick up a card
+            else if(userInput == -1) {
+                //Get a random card
+                topCard = randomSuit()*randomCard();
+                firstCard = cardDeck[topCard];
+                
+                //Remove duplicate chance
+                while (stringPlayerHand.contains(firstCard) || stringComputerHand.contains(firstCard)) {
+                    topCard = randomSuit()*randomCard();
+                    firstCard = cardDeck[topCard];
+                }
+                //Add new card to playerHand array
+                stringPlayerHand.add(firstCard);
+                //Increase handSize by 1
+                playerHandSize++;
+                //Output new card
+                System.out.println("You picked up a(n)" + stringPlayerHand.get(playerHandSize-1));
+            }
+            //Anything played that is not within bounds
             else if (userInput > playerHandSize-1) {
                 System.out.println("Invalid play");
+                System.out.println("End of Demo");
             }
             
             
@@ -319,8 +284,10 @@ public class Crazy8Game {
      * @return playerHand
      */
     public static int[] cardMethod() {
+        //new array
         int [ ] cards = new int [16];
         
+        //loop to get cards
         for (int i = 0; i < 16; i++) {
             cards[i] = randomSuit()*randomCard();
         }
@@ -411,6 +378,7 @@ public class Crazy8Game {
      * @return randomSuit
      */
     public static int randomSuit() {
+        //Get random
         int randomSuit = (int)Math.round(Math.random() * 3 + 1);
         return(randomSuit);
     }
@@ -420,6 +388,7 @@ public class Crazy8Game {
      * @return 
      */
     public static int randomCard() {
+        //get Random
         int randomCard = (int)Math.round(Math.random() * 12 + 1);
         return(randomCard);
     }
